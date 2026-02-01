@@ -91,9 +91,11 @@ public class RMICliente {
                 System.out.println("La IP introducida no es correcta.");
             }
         } catch (RemoteException e) {
-            throw new RuntimeException(e);
+            System.err.println("Error de comunicación: No se pudo conectar con el servidor en la IP o el puerto 5555.");
         } catch (NotBoundException e) {
-            throw new RuntimeException(e);
+            System.err.println("Error: El servicio 'ManipularTexto' no se encuentra registrado en el servidor.");
+        } catch (Exception e) {
+            System.err.println("Se ha producido un error inesperado: " + e.getMessage());
         }
     }
     /**

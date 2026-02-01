@@ -4,8 +4,6 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Clase que implementa la interfaz remota {@link RMIInterface}.
@@ -54,7 +52,7 @@ public class RMIServidor implements RMIInterface{
      * Crea el registro RMI en el puerto especificado, instancia el objeto servidor
      * y lo vincula al nombre "ManipularTexto" para que los clientes puedan localizarlo.
      */
-    static void main() {
+    public static void main() {
         System.out.println("Servidor iniciado.");
         Registry reg = null;
 
