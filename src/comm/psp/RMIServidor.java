@@ -43,8 +43,12 @@ public class RMIServidor implements RMIInterface{
      */
     @Override
     public synchronized String reemplazar(String palabra, String palabraNueva, String texto) {
-        String textoNuevo = texto.replaceAll("\\b"+palabra+"\\b", palabraNueva);
-        return textoNuevo;
+        if (texto.contains(palabra)){
+            String textoNuevo = texto.replaceAll("\\b"+palabra+"\\b", palabraNueva);
+            return textoNuevo;
+        } else {
+            return "No se puede reemplazar una palabra que no esta en el texto";
+        }
     }
 
     /**
@@ -52,7 +56,7 @@ public class RMIServidor implements RMIInterface{
      * Crea el registro RMI en el puerto especificado, instancia el objeto servidor
      * y lo vincula al nombre "ManipularTexto" para que los clientes puedan localizarlo.
      */
-    public static void main() {
+    public static void main(String[] args) {
         System.out.println("Servidor iniciado.");
         Registry reg = null;
 
