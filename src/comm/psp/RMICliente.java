@@ -6,7 +6,20 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.Scanner;
 
+/**
+ * Clase cliente que implementa una conexión RMI (Remote Method Invocation).
+ * Permite interactuar con un servidor remoto para realizar operaciones de
+ * manipulación de texto como conteo y reemplazo de palabras.
+ *  * @author Bianca Stefania Amariutei, Kevin Ramirez
+ * @version 1.0
+ */
+
 public class RMICliente {
+    /**
+     * Punto de entrada de la aplicación cliente.
+     * Gestiona la conexión con el registro RMI, la entrada de usuario por consola
+     * y la lógica del menú de operaciones.
+     */
     public static void main(String[] args) {
         final String texto = "En un lugar de la Mancha, de cuyo nombre no quiero acordarme, " +
                             "no ha mucho tiempo que vivía un hidalgo de los de lanza en astillero, " +
@@ -25,6 +38,7 @@ public class RMICliente {
             if (validarSubred(ip)) {
                 System.out.println("IP válida...");
 
+                // Obtención del registro en el puerto 5555
                 Registry registry = LocateRegistry.getRegistry(ip, 5555);
                 manipularTexto = (RMIInterface) registry.lookup("ManipularTexto");
 
@@ -82,7 +96,12 @@ public class RMICliente {
             throw new RuntimeException(e);
         }
     }
-
+    /**
+     * (Metodo seleccionado del exaen) Valida si una cadena de texto tiene el formato de una dirección IPv4 válida.
+     * Comprueba que contenga cuatro octetos y que cada uno esté en el rango [0, 255].
+     * * @param ip La cadena de texto que contiene la dirección IP a validar.
+     * @return {@code true} si la IP es válida; {@code false} en caso contrario.
+     */
     public static boolean validarSubred(String ip) {
         // Step 1: Separate the given string into an array of strings using the dot as delimiter
         String[] parts = ip.split("\\.");

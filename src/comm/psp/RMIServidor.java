@@ -7,21 +7,53 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase que implementa la interfaz remota {@link RMIInterface}.
+ * Actúa como el servidor en la arquitectura RMI, proporcionando servicios
+ * de procesamiento de texto a los clientes conectados.
+ * * @author Bianca Stefania Amariutei, Kevin Ramirez
+ * @version 1.0
+ */
+
 public class RMIServidor implements RMIInterface{
+    /** Puerto en el que escuchará el registro RMI. */
     private static final int PUERTO = 5555;
 
+    /**
+     * Cuenta las ocurrencias exactas de una palabra dentro de un texto dado.
+     * Utiliza expresiones regulares con límites de palabra (\\b) para asegurar
+     * que solo se cuenten coincidencias exactas.
+     * * @param palabra La palabra que se desea buscar.
+     * @param texto El cuerpo de texto donde se realizará la búsqueda.
+     * @return El número de veces que aparece la palabra en el texto.
+     * @throws RemoteException Si ocurre un error durante la invocación remota.
+     */
     @Override
     public synchronized int contar(String palabra, String texto) {
         String[] partes = texto.split("\\b" + palabra + "\\b");
         return partes.length - 1;
     }
 
+    /**
+     * Reemplaza todas las apariciones de una palabra específica por una nueva
+     * dentro de un texto, respetando los límites de palabra.
+     * * @param palabra La palabra original que se desea sustituir.
+     * @param palabraNueva La nueva palabra que reemplazará a la original.
+     * @param texto El texto sobre el cual realizar la operación.
+     * @return El texto resultante tras realizar los reemplazos.
+     * @throws RemoteException Si ocurre un error durante la invocación remota.
+     */
     @Override
     public synchronized String reemplazar(String palabra, String palabraNueva, String texto) {
         String textoNuevo = texto.replaceAll("\\b"+palabra+"\\b", palabraNueva);
         return textoNuevo;
     }
 
+    /**
+     * Método de inicialización del servidor.
+     * Crea el registro RMI en el puerto especificado, instancia el objeto servidor
+     * y lo vincula al nombre "ManipularTexto" para que los clientes puedan localizarlo.
+     */
     static void main() {
         System.out.println("Servidor iniciado.");
         Registry reg = null;
