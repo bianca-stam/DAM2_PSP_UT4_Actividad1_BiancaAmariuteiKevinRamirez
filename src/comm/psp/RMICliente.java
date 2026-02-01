@@ -36,11 +36,11 @@ public class RMICliente {
             String ip = scString.nextLine();
 
             if (validarSubred(ip)) {
-                System.out.println("IP válida...");
-
                 // Obtención del registro en el puerto 5555
                 Registry registry = LocateRegistry.getRegistry(ip, 5555);
                 manipularTexto = (RMIInterface) registry.lookup("ManipularTexto");
+
+                System.out.println("IP válida...");
 
                 if (manipularTexto != null) {
                     int opcion = 0;
