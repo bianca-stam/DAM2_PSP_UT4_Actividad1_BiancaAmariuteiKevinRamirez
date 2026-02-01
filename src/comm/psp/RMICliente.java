@@ -21,6 +21,13 @@ public class RMICliente {
      * y la lógica del menú de operaciones.
      */
     public static void main(String[] args) {
+        /**
+         * Texto base sobre el cual se realizarán las operaciones remotas.
+         * Se define como una constante local para ser enviada como parámetro facilitando
+         * el cuerpo del texto al servidor para la ejecución de los servicios de
+         * conteo y reemplazo.
+         */
+
         final String texto = "En un lugar de la Mancha, de cuyo nombre no quiero acordarme, " +
                             "no ha mucho tiempo que vivía un hidalgo de los de lanza en astillero, " +
                             "adarga antigua, rocín flaco y galgo corredor. Una olla de algo más vaca " +
